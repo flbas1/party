@@ -1,0 +1,33 @@
+id: bootstrap
+version: 1
+title: PipBoy 2100
+
+layout:
+  type: vertical
+
+components:
+  - type: card
+    id: party-source
+    title: Select Party Configuration
+    text: Choose where PipBoy should find your party configuration.
+
+    options:
+      - label: Local Parties
+        type: local
+        capability: backend.directory-scan
+        description: Find party configurations on this server.
+
+      - label: Google Drive
+        type: url
+        url: https://...
+        description: Load a configuration from Google Drive.
+
+      - label: Party Server
+        type: url
+        url: https://party.example.com/party.yml
+        description: Load a configuration from a party server.
+
+      - label: Private Server
+        type: url
+        url: https://...
+        description: Load a private configuration.

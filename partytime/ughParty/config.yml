@@ -1,0 +1,9 @@
+app:
+  name: Birthday Party
+
+layout:
+  type: vertical
+
+  children:
+    - type: text
+      content: "Happy ugh Birthday!"

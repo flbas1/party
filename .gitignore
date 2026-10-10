@@ -1,0 +1,42 @@
+# Node / Vite
+node_modules/
+dist/
+
+# .NET
+**/bin/
+**/obj/
+
+# IDE
+.vscode/
+.idea/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Node.js
+node_modules/
+dist/
+
+# Vite
+.vite/
+
+# .NET build output
+**/bin/
+**/obj/
+
+# IDE settings
+.idea/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
