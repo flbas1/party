@@ -11,6 +11,7 @@ import HeadingComponent from '../components/HeadingComponent'
 import CardComponent from '../components/CardComponent'
 import LayoutComponent from '../components/LayoutComponent'
 import CountdownComponent from '../components/CountdownComponent'
+import RevealComponent from '../components/RevealComponent'
 
 function UnsupportedComponent({ node }: {
   node: Config
@@ -34,6 +35,7 @@ export const componentRegistry: Record<string, ComponentRenderer> = {
   vertical: LayoutComponent,
   horizontal: LayoutComponent,
   countdown: CountdownComponent,
+  reveal: RevealComponent,
 }
 
 export function renderComponent(
