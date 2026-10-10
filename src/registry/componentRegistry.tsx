@@ -10,6 +10,7 @@ import TextComponent from '../components/TextComponent'
 import HeadingComponent from '../components/HeadingComponent'
 import CardComponent from '../components/CardComponent'
 import LayoutComponent from '../components/LayoutComponent'
+import CountdownComponent from '../components/CountdownComponent'
 
 function UnsupportedComponent({ node }: {
   node: Config
@@ -32,6 +33,7 @@ export const componentRegistry: Record<string, ComponentRenderer> = {
   card: CardComponent,
   vertical: LayoutComponent,
   horizontal: LayoutComponent,
+  countdown: CountdownComponent,
 }
 
 export function renderComponent(

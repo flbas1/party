@@ -3,7 +3,19 @@ app:
 
 layout:
   type: vertical
-
   children:
-    - type: text
-      content: "Happy ugh Birthday!"
+    - type: heading
+      content: "PipBoy Countdown"
+      level: 2
+
+    - type: countdown
+      durationSeconds: 300
+      viewMode: digital
+      allowViewChange: true
+      viewModes:
+        - digital
+        - compact
+        - long
+        - date-diff
+      color: "#00ff66"
+      fontSize: "2rem"
