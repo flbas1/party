@@ -17,6 +17,7 @@ import SlideshowComponent from '../components/SlideshowComponent'
 import TabCardComponent from '../components/TabCardComponent'
 import HtmlComponent from '../components/HtmlComponent'
 import ImageComponent from '../components/ImageComponent'
+import VideoComponent from '../components/VideoComponent'
 
 function UnsupportedComponent({ node }: {
   node: Config
@@ -46,6 +47,7 @@ export const componentRegistry: Record<string, ComponentRenderer> = {
   slideshow: SlideshowComponent,
   tabcard: TabCardComponent,
   image: ImageComponent,
+  video: VideoComponent,
 }
 
 export function renderComponent(

@@ -166,7 +166,7 @@ const context: ComponentContext = {
   //   loading,
   // })
 
-  const title = config?.title ?? config?.app?.name ?? 'PipBoy'
+  const title = config?.title ?? config?.app?.name ?? 'Party App 2000'
   const nodes: Config[] = config?.components ?? config?.layout?.children ?? []
 
   if (!config && loading) {
@@ -194,11 +194,11 @@ const context: ComponentContext = {
     <main>
       <header>
         <h1>{title}</h1>
-        {partyId && (
+        {/* {partyId && (
           <button className="back" onClick={returnToBootstrap}>
             Back to party selection
           </button>
-        )}
+        )} */}
       </header>
 
       {isBootstrap && parties.length > 0 && (

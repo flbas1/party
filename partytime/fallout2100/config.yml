@@ -71,3 +71,30 @@ layout:
                 <div class="objective">
                     ☐ Avoid Deathclaws
                 </div>
+
+        - name: MSG
+          id:  OVERSEER
+          children:
+            - type: video
+              src:  stimpak.mp4
+              controls:  true
+              autoplay: false
+              loop: false
+              className: overseer-video
+
+    - type: html
+      name: footer
+      id: footer
+      content:  |
+        <footer>
+          <span>STAT</span>
+          <span>INV</span>
+          <span class="selected">DATA</span>
+          <span>MAP</span>
+          <span>RADIO</span>
+        </footer>
+        <br />
+        <br />
+        <br />
+
+

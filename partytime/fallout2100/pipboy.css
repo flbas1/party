@@ -676,3 +676,45 @@ footer .selected {
         rgba(0, 0, 0, 0.45) 4px
     );
 }
+
+/* .reveal-video {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    margin-inline: auto;
+    filter: grayscale(1) sepia(1) hue-rotate(45deg) saturate(4);
+}
+
+.reveal-video::after {
+     background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.45) 3px,
+        rgba(0, 0, 0, 0.45) 4px
+    );
+} */
+
+.overseer-video-screen {
+    position: relative;
+    overflow: hidden;
+    filter: grayscale(1) sepia(1) hue-rotate(45deg) saturate(4);
+    
+}
+
+.overseer-video-screen::after {
+    content: "";
+    
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.45) 3px,
+        rgba(0, 0, 0, 0.45) 4px
+    );
+}

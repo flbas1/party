@@ -3,7 +3,7 @@ import { useState } from 'react'
 import type { ComponentProps } from '../types/ComponentTypes'
 import { useRemainingTime } from './shared/useRemainingTime'
 
-export default function RevealComponent({ node }: ComponentProps) {
+export default function RevealComponent({ node, context }: ComponentProps) {
   const [localStartedAtMs] = useState(() => Date.now())
 const startedAtMs =
   typeof node.startAtMs === 'number'
@@ -78,6 +78,16 @@ const endAtMs =
           Configure an image path
         </div>
       )}
+
+{/* Render nested components when supplied. */}
+{Array.isArray(node.children) &&
+  node.children.map((child, childIndex) =>
+    context.renderComponent(
+      child,
+      context,
+      `reveal-${node.id ?? 'content'}-${childIndex}`,
+    ),
+  )}
 
       {node.showProgress === true && (
         <div
