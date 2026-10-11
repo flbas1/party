@@ -1,6 +1,7 @@
 app:
   name: Fallout 2100 Birthday Party
-
+  icon: favicon.png
+  
 style: pipboy.css
 
 layout:
