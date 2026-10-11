@@ -41,7 +41,7 @@ function App() {
 
       try {
         const bootstrap = await loadYaml('/bootstrap.yml')
-        console.log('Bootstrap loaded:', bootstrap)
+        // console.log('Bootstrap loaded:', bootstrap)
         setConfig(bootstrap)
 
         const response = await fetch('/api/parties')
@@ -50,7 +50,7 @@ function App() {
         }
 
         const discovered = (await response.json()) as Party[]
-        console.log('Parties discovered:', discovered)
+        // console.log('Parties discovered:', discovered)
         setParties(discovered)
 
         if (discovered.length === 0) {
@@ -79,7 +79,7 @@ function App() {
 
 
   useEffect(() => {
-    console.log('Stylesheet effect:', partyId, config?.style)
+    // console.log('Stylesheet effect:', partyId, config?.style)
 
     if (!partyId || typeof config?.style !== 'string') {
       console.log('Stylesheet skipped')
@@ -90,7 +90,7 @@ function App() {
     link.rel = 'stylesheet'
     link.href = `/api/parties/${partyId}/${config.style.replace(/^\.?\//, '')}`
 
-    console.log('Appending stylesheet:', link.href)
+    // console.log('Appending stylesheet:', link.href)
     document.head.appendChild(link)
 
     return () => link.remove()
@@ -104,14 +104,14 @@ function App() {
   }
 
   async function selectParty(party: Party) {
-    console.log('selectParty called:', party)
+    // console.log('selectParty called:', party)
 
     setLoading(true)
     setMessage('')
 
     try {
       const partyConfig = await loadYaml(party.configUrl)
-      console.log('Loaded party config:', partyConfig)
+      // console.log('Loaded party config:', partyConfig)
 
       setConfig(partyConfig)
       setPartyId(party.id)
@@ -159,12 +159,12 @@ const context: ComponentContext = {
 
   const isBootstrap = config?.id === 'bootstrap'
 
-  console.log('RENDER', {
-    configId: config?.id,
-    isBootstrap,
-    partyCount: parties.length,
-    loading,
-  })
+  // console.log('RENDER', {
+  //   configId: config?.id,
+  //   isBootstrap,
+  //   partyCount: parties.length,
+  //   loading,
+  // })
 
   const title = config?.title ?? config?.app?.name ?? 'PipBoy'
   const nodes: Config[] = config?.components ?? config?.layout?.children ?? []
@@ -183,12 +183,12 @@ const context: ComponentContext = {
     )
   }
 
-  console.log('Bootstrap render check', {
-    configId: config?.id,
-    isBootstrap,
-    partyCount: parties.length,
-    loading,
-  })
+  // console.log('Bootstrap render check', {
+  //   configId: config?.id,
+  //   isBootstrap,
+  //   partyCount: parties.length,
+  //   loading,
+  // })
 
   return (
     <main>

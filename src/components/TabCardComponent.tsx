@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from 'react'
-import type {  ComponentProps } from '../types/ComponentTypes'
-
+import type { ComponentProps, Config } from '../types/ComponentTypes'
 
 type TabItem = {
     name?: string
@@ -11,15 +10,20 @@ type TabItem = {
 
 type Tab = {
     name: string
+    id?: string
+    description?: string
+    children?: Config[]
     items?: TabItem[] | string[]
 }
 
-export default function TabCardComponent({ node }: ComponentProps) {
+export default function TabCardComponent({ node, context }: ComponentProps) {
+    console.log('TabCardComponent called:', node)
+    
     const tabs: Tab[] = Array.isArray(node.tabs) ? node.tabs : []
     const layout = node.layout === 'vertical' ? 'vertical' : 'horizontal'
     const selection = node.selection === 'multiple' ? 'multiple' : 'single'
 
-    // defaultOpen can be a tab name, true (first tab), or omitted.
+    // Tab names identify open tabs. Fall back to the first tab when requested.
     const getDefaults = (): string[] => {
         if (typeof node.defaultOpen === 'string') {
             return tabs.some(tab => tab.name === node.defaultOpen)
@@ -36,7 +40,6 @@ export default function TabCardComponent({ node }: ComponentProps) {
 
     const [openTabs, setOpenTabs] = useState<string[]>(getDefaults)
 
-    // Reset open tabs when the configuration changes.
     useEffect(() => {
         setOpenTabs(getDefaults())
     }, [node])
@@ -57,15 +60,18 @@ export default function TabCardComponent({ node }: ComponentProps) {
 
     return (
         <section className={`tabcard tabcard-${layout} tabcard-${selection}`}>
-            <div className="tabcard-tabs" role="tablist"
-                aria-orientation={layout === 'vertical' ? 'vertical' : 'horizontal'}>
+            <div
+                className="tabcard-tabs"
+                role="tablist"
+                aria-orientation={layout === 'vertical' ? 'vertical' : 'horizontal'}
+            >
                 {tabs.map((tab, index) => {
                     const isOpen = openTabs.includes(tab.name)
                     const panelId = `tabcard-panel-${index}`
 
                     return (
                         <button
-                            key={`${tab.name}-${index}`}
+                            key={`${tab.id ?? tab.name}-${index}`}
                             type="button"
                             className={`tabcard-tab${isOpen ? ' active' : ''}`}
                             aria-expanded={isOpen}
@@ -80,15 +86,25 @@ export default function TabCardComponent({ node }: ComponentProps) {
 
             <div className="tabcard-panels">
                 {tabs.map((tab, index) => {
-                    const isOpen = openTabs.includes(tab.name)
-                    if (!isOpen) return null
+                    if (!openTabs.includes(tab.name)) return null
 
                     return (
                         <div
-                            key={`${tab.name}-${index}`}
+                            key={`${tab.id ?? tab.name}-${index}`}
                             id={`tabcard-panel-${index}`}
                             className="tabcard-panel"
                         >
+                            {/* Render nested components when supplied. */}
+                            {Array.isArray(tab.children) &&
+                                tab.children.map((child, childIndex) =>
+                                    context.renderComponent(
+                                        child,
+                                        context,
+                                        `${tab.id ?? tab.name}-${childIndex}`,
+                                    ),
+                                )}
+
+                            {/* Preserve existing menu item rendering. */}
                             {Array.isArray(tab.items) && tab.items.map((item, itemIndex) => {
                                 const entry: TabItem = typeof item === 'string'
                                     ? { name: item }
@@ -100,7 +116,9 @@ export default function TabCardComponent({ node }: ComponentProps) {
                                         key={`${entry.name ?? 'item'}-${itemIndex}`}
                                     >
                                         {entry.name && (
-                                            <div className="tabcard-item-name">{entry.name}</div>
+                                            <div className="tabcard-item-name">
+                                                {entry.name}
+                                            </div>
                                         )}
 
                                         {(entry.description || entry.content) && (
@@ -111,6 +129,15 @@ export default function TabCardComponent({ node }: ComponentProps) {
                                     </div>
                                 )
                             })}
+
+                            {/* Support simple description-only placeholder tabs. */}
+                            {!tab.children?.length &&
+                                !tab.items?.length &&
+                                tab.description && (
+                                    <div className="tabcard-item-description">
+                                        {tab.description}
+                                    </div>
+                                )}
                         </div>
                     )
                 })}

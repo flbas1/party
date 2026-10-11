@@ -1,0 +1,83 @@
+app:
+  name: Fallout 2100 Birthday Party
+
+style: pipboy.css
+
+layout:
+  # type: vertical
+  children:
+    - type:  tabcard
+      layout:  horizontal
+      selection:  single
+      defaultOpen: Food
+      
+      tabs:
+        - type: tabcard
+          layout: vertical
+          selection: single
+          defaultOpen: Food
+          name:  Food
+          id: food
+          
+          tabs:
+            - name: Food
+              items:
+                - name: YumYum Deviled Eggs
+                  description: Pure dried whole deviled eggs from before the Great War.
+                - name: Iguana on a Stick
+                  description: Not the finest meal in the wasteland, but it gets the job done.
+                - name: Mirelurk Crab Cakes
+                  description: "Tender mirelurk meat formed into savory cakes."
+                - name: Government Cheese
+                  description: "200% More Preservatives!"
+            
+            - name: Treats
+              id: treats
+              items:
+                - name: BlamCo Mac and Cheese
+                  description: "Pre-War boxed macaroni and cheese from BlamCo. A classic comfort food that somehow survived the apocalypse."
+
+                - name: Sugar Bombed Carrots
+                  description: "Fresh wasteland carrots prepared with the unmistakable sweetness of Sugar Bombs."
+
+                - name: Dusty's Brahmin Burgers
+                  description: "A hearty wasteland burger made from locally sourced brahmin. Two heads, one delicious burger."
+
+                - name: Genetically Modified Brahmin-Free Burgers
+                  description: "A sophisticated alternative for survivors who demand the taste of the wasteland without the brahmin."
+
+                - name: Deathclaw Wings
+                  description: "Tender, spicy and absolutely terrifying. Best enjoyed after someone else has done the hunting."
+
+                - name: BlamCo Crispy Strips
+                  description: "Golden, crunchy strips prepared in the finest pre-War tradition. Crispy enough to survive another apocalypse."
+
+            - name: Beverages
+              id: beverages
+              items:
+
+                - name: Nuka-Cola
+
+                - name: Nuka-Sasparilla
+
+                - name: Nuka Mango Quantum
+                  description: "Glows brighter after sunset"
+
+            - name: Dessert
+              id: dessert
+              items:
+
+                - name: Muttfruit Crumble
+                  description: "A sweet wasteland dessert made with mutfruit, baked beneath a crumbly golden topping."
+
+                - name: Feral Ghoul Apples
+                  description: "Once human. Still delicious."
+
+                - name: Fancy Lads Cake
+                  description: "A frosted pre-War confection packed with enough sugar and preservatives to remain edible long after civilization stopped being edible. Now with 200% more preservatives."
+
+        - type: text       
+          id: radio
+          name: radio
+          text:  this is where the radio goes!
+
