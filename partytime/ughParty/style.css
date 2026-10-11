@@ -65,3 +65,9 @@ button.back {
   gap: 1rem;
 }
 
+.party-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}

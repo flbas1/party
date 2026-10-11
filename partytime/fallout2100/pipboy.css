@@ -624,3 +624,55 @@ footer .selected {
   outline: 2px solid var(--pip);
   outline-offset: 3px;
 }
+
+
+.map-screen {
+    position: relative;
+    overflow: hidden;
+}
+
+.map-phosphor img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(1) sepia(1) hue-rotate(45deg) saturate(4);
+}
+
+.screen::before {
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(124, 255, 0, 0.055) 0px,
+            rgba(124, 255, 0, 0.055) 1px,
+            rgba(0, 0, 0, 0.10) 2px,
+            rgba(0, 0, 0, 0.10) 4px
+        );
+
+    animation: scanlineDrift 0.15s linear infinite;
+}
+
+@keyframes scanlineDrift {
+    from { transform: translateY(0); }
+    to   { transform: translateY(4px); }
+}
+
+.map-screen {
+    position: relative;
+    overflow: hidden;
+}
+
+.map-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.45) 3px,
+        rgba(0, 0, 0, 0.45) 4px
+    );
+}

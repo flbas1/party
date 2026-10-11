@@ -15,6 +15,8 @@ import RevealComponent from '../components/RevealComponent'
 import RevealGameComponent from '../components/RevealGameComponent'
 import SlideshowComponent from '../components/SlideshowComponent'
 import TabCardComponent from '../components/TabCardComponent'
+import HtmlComponent from '../components/HtmlComponent'
+import ImageComponent from '../components/ImageComponent'
 
 function UnsupportedComponent({ node }: {
   node: Config
@@ -33,6 +35,7 @@ function UnsupportedComponent({ node }: {
 
 export const componentRegistry: Record<string, ComponentRenderer> = {
   text: TextComponent,
+  html: HtmlComponent,
   heading: HeadingComponent,
   card: CardComponent,
   vertical: LayoutComponent,
@@ -42,6 +45,7 @@ export const componentRegistry: Record<string, ComponentRenderer> = {
   revealGame: RevealGameComponent,
   slideshow: SlideshowComponent,
   tabcard: TabCardComponent,
+  image: ImageComponent,
 }
 
 export function renderComponent(

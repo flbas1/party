@@ -44,11 +44,30 @@ layout:
         - name: Map
           id: map
           children:
-            - type: text
-              content: Map goes here
+            - type: image
+              image:  map.png
+              alt:  map to the Orlando Settlement
+              className: "map-screen map-phosphor"
 
-        - name: Mission
-          id: mission
+        - name: QUEST
+          id: quest
           children:
-            - type: text
-              content: Mission goes here
+            - type: html
+              content: |
+                <h2>SURVIVE THE BIRTHDAY</h2>
+
+                <div class="objective">
+                    ☑ Locate Brahmin Burgers
+                </div>
+
+                <div class="objective">
+                    ☑ Acquire Nuka-Cola
+                </div>
+
+                <div class="objective">
+                    ☐ Consume Dandy Boy Cake
+                </div>
+
+                <div class="objective">
+                    ☐ Avoid Deathclaws
+                </div>

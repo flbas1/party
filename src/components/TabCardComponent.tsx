@@ -17,8 +17,8 @@ type Tab = {
 }
 
 export default function TabCardComponent({ node, context }: ComponentProps) {
-    console.log('TabCardComponent called:', node)
-    
+    // console.log('TabCardComponent called:', node)
+
     const tabs: Tab[] = Array.isArray(node.tabs) ? node.tabs : []
     const layout = node.layout === 'vertical' ? 'vertical' : 'horizontal'
     const selection = node.selection === 'multiple' ? 'multiple' : 'single'
