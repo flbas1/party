@@ -4,17 +4,21 @@ import type { ComponentProps } from '../types/ComponentTypes'
 import { useRemainingTime } from './shared/useRemainingTime'
 
 export default function RevealComponent({ node }: ComponentProps) {
-  const [startedAtMs] = useState(() => Date.now())
+  const [localStartedAtMs] = useState(() => Date.now())
+const startedAtMs =
+  typeof node.startAtMs === 'number'
+    ? node.startAtMs
+    : localStartedAtMs
 
   const durationSeconds =
     typeof node.durationSeconds === 'number'
       ? Math.max(0, node.durationSeconds)
       : 120
 
-  const endAtMs =
-    typeof node.endAtMs === 'number'
-      ? node.endAtMs
-      : startedAtMs + durationSeconds * 1000
+const endAtMs =
+  typeof node.endAtMs === 'number'
+    ? node.endAtMs
+    : startedAtMs + durationSeconds * 1000
 
   const { nowMs, expired } = useRemainingTime(endAtMs)
 

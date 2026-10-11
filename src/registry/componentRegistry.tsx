@@ -12,6 +12,8 @@ import CardComponent from '../components/CardComponent'
 import LayoutComponent from '../components/LayoutComponent'
 import CountdownComponent from '../components/CountdownComponent'
 import RevealComponent from '../components/RevealComponent'
+import RevealGameComponent from '../components/RevealGameComponent'
+import SlideshowComponent from '../components/SlideshowComponent'
 
 function UnsupportedComponent({ node }: {
   node: Config
@@ -36,6 +38,8 @@ export const componentRegistry: Record<string, ComponentRenderer> = {
   horizontal: LayoutComponent,
   countdown: CountdownComponent,
   reveal: RevealComponent,
+  revealGame: RevealGameComponent,
+  slideshow: SlideshowComponent,
 }
 
 export function renderComponent(

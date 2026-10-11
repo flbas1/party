@@ -85,7 +85,12 @@ function formatRemaining(totalMs: number, mode: ViewMode): string {
 export default function CountdownComponent({
   node,
 }: ComponentProps) {
-  const [startedAtMs] = useState(() => Date.now())
+  const [localStartedAtMs] = useState(() => Date.now())
+const startedAtMs =
+  typeof node.startAtMs === 'number'
+    ? node.startAtMs
+    : localStartedAtMs
+
   const [selectedMode, setSelectedMode] = useState<ViewMode>(
     node.viewMode ?? 'digital',
   )
@@ -100,11 +105,13 @@ export default function CountdownComponent({
       ? Math.max(0, node.durationSeconds)
       : null
 
-  const endAtMs =
-    targetMs ??
-    (durationSeconds !== null
-      ? startedAtMs + durationSeconds * 1000
-      : null)
+const endAtMs =
+  typeof node.endAtMs === 'number'
+    ? node.endAtMs
+    : targetMs ??
+      (durationSeconds !== null
+        ? startedAtMs + durationSeconds * 1000
+        : null)
 
   const { remainingMs, expired } = useRemainingTime(endAtMs)
 

@@ -1,0 +1,521 @@
+:root {
+    --pip: #7cff00;
+    --pip-dim: #4b9b00;
+    --pip-dark: #142408;
+    --pip-bg: #071000;
+    --pip-glow: rgba(124, 255, 0, 0.45);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    background: #000;
+    color: var(--pip);
+    font-family: "Courier New", monospace;
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   PIP-BOY SCREEN
+   ========================================================= */
+
+.screen {
+    position: relative;
+    min-height: 100vh;
+    padding: 30px;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #1a2b0d 0%,
+            #101a08 45%,
+            #071000 75%,
+            #020400 100%
+        );
+
+    color: var(--pip);
+
+    text-shadow:
+        0 0 4px var(--pip),
+        0 0 10px var(--pip-glow);
+
+    box-shadow:
+        inset 0 0 120px rgba(0, 0, 0, 0.95),
+        inset 0 0 50px rgba(124, 255, 0, 0.10),
+        0 0 35px rgba(124, 255, 0, 0.15);
+
+    animation: screenFlicker 4s infinite;
+}
+
+/* CRT scanlines */
+.screen::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(124, 255, 0, 0.055) 0px,
+            rgba(124, 255, 0, 0.055) 1px,
+            rgba(0, 0, 0, 0.10) 2px,
+            rgba(0, 0, 0, 0.10) 4px
+        );
+
+    animation: scanlineDrift 0.15s linear infinite;
+}
+
+/* CRT flicker layer */
+.screen::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 101;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            rgba(124, 255, 0, 0.018),
+            rgba(124, 255, 0, 0.018)
+        );
+
+    animation: crtFlicker 0.11s infinite;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+
+    border-bottom: 2px solid var(--pip);
+
+    box-shadow:
+        0 3px 8px rgba(124, 255, 0, 0.10);
+}
+
+.brand {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.status {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.online {
+    font-weight: bold;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.title-panel {
+    margin-bottom: 25px;
+}
+
+.small-label {
+    color: var(--pip-dim);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+h1 {
+    margin: 8px 0 0;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.1;
+}
+
+/* =========================================================
+   TAB NAVIGATION
+   ========================================================= */
+
+.tabs {
+    display: flex;
+    gap: 8px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 2px solid var(--pip);
+}
+
+.tab {
+    background: transparent;
+    border: none;
+
+    color: var(--pip-dim);
+
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+
+    padding: 10px 22px;
+
+    cursor: pointer;
+
+    text-shadow:
+        0 0 4px rgba(124, 255, 0, 0.35);
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.tab:hover,
+.tab.active {
+    color: var(--pip);
+
+    background:
+        rgba(124, 255, 0, 0.08);
+
+    box-shadow:
+        inset 0 -3px 0 var(--pip),
+        0 0 8px rgba(124, 255, 0, 0.08);
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.section {
+    margin-bottom: 28px;
+}
+
+.section h2,
+.quest-header {
+    margin: 0;
+
+    padding-bottom: 5px;
+
+    border-bottom: 1px solid var(--pip-dim);
+
+    letter-spacing: 2px;
+}
+
+/* =========================================================
+   MENU ITEMS
+   ========================================================= */
+
+.items {
+    display: grid;
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.item {
+    padding: 10px 14px;
+
+    border-left: 3px solid var(--pip);
+
+    background:
+        rgba(124, 255, 0, 0.035);
+
+    transition:
+        background 0.15s ease,
+        padding-left 0.15s ease;
+}
+
+.item::before {
+    content: "> ";
+}
+
+.item:hover {
+    padding-left: 20px;
+
+    background:
+        rgba(124, 255, 0, 0.10);
+
+    box-shadow:
+        0 0 12px rgba(124, 255, 0, 0.08);
+}
+
+/* =========================================================
+   RADIO
+   ========================================================= */
+
+.radio,
+.quest {
+    max-width: 850px;
+    margin: auto;
+    padding: 25px;
+
+    border: 1px solid var(--pip);
+
+    background:
+        rgba(124, 255, 0, 0.02);
+
+    box-shadow:
+        0 0 20px rgba(124, 255, 0, 0.10),
+        inset 0 0 30px rgba(124, 255, 0, 0.04);
+}
+
+.radio-title {
+    margin-bottom: 35px;
+
+    text-align: center;
+
+    font-size: 2rem;
+}
+
+.now-playing {
+    color: var(--pip-dim);
+    letter-spacing: 1px;
+}
+
+.song {
+    margin: 10px 0 30px;
+
+    font-size: 2rem;
+}
+
+.radio-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.radio-controls button {
+    padding: 8px 18px;
+
+    background: transparent;
+
+    border: 1px solid var(--pip);
+
+    color: var(--pip);
+
+    font-family: inherit;
+    font-size: 1.3rem;
+
+    cursor: pointer;
+
+    text-shadow:
+        0 0 5px var(--pip);
+
+    box-shadow:
+        0 0 6px rgba(124, 255, 0, 0.06);
+
+    transition:
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.radio-controls button:hover {
+    background:
+        rgba(124, 255, 0, 0.10);
+
+    box-shadow:
+        0 0 14px rgba(124, 255, 0, 0.14);
+}
+
+.signal {
+    margin-top: 35px;
+}
+
+.signal span {
+    margin-left: 15px;
+
+    letter-spacing: -2px;
+}
+
+/* =========================================================
+   QUEST
+   ========================================================= */
+
+.objective {
+    margin: 20px 0;
+
+    font-size: 1.3rem;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    display: flex;
+    justify-content: space-around;
+
+    margin-top: 40px;
+    padding-top: 15px;
+
+    border-top: 2px solid var(--pip);
+
+    font-weight: bold;
+}
+
+footer span {
+    opacity: 0.65;
+}
+
+footer .selected {
+    opacity: 1;
+}
+
+/* =========================================================
+   CRT ANIMATIONS
+   ========================================================= */
+
+/* Moving horizontal scanlines */
+@keyframes scanlineDrift {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(4px);
+    }
+}
+
+/* Fast subtle phosphor flicker */
+@keyframes crtFlicker {
+    0% {
+        opacity: 0.12;
+    }
+
+    10% {
+        opacity: 0.18;
+    }
+
+    20% {
+        opacity: 0.10;
+    }
+
+    30% {
+        opacity: 0.17;
+    }
+
+    40% {
+        opacity: 0.08;
+    }
+
+    50% {
+        opacity: 0.15;
+    }
+
+    60% {
+        opacity: 0.11;
+    }
+
+    70% {
+        opacity: 0.19;
+    }
+
+    80% {
+        opacity: 0.09;
+    }
+
+    90% {
+        opacity: 0.16;
+    }
+
+    100% {
+        opacity: 0.12;
+    }
+}
+
+/* Slow whole-screen brightness instability */
+@keyframes screenFlicker {
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    46% {
+        filter: brightness(0.99);
+    }
+
+    47% {
+        filter: brightness(1.015);
+    }
+
+    48% {
+        filter: brightness(0.975);
+    }
+
+    49% {
+        filter: brightness(1.01);
+    }
+
+    50% {
+        filter: brightness(0.985);
+    }
+
+    51% {
+        filter: brightness(1);
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+    .screen {
+        padding: 15px;
+    }
+
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .status {
+        gap: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .tabs {
+        overflow-x: auto;
+    }
+
+    .tab {
+        padding: 10px 15px;
+    }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .screen,
+    .screen::before,
+    .screen::after {
+        animation: none;
+    }
+}

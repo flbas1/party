@@ -1,5 +1,8 @@
+
 app:
   name: Birthday Party
+
+style: ./style.css
 
 layout:
   type: vertical
@@ -8,25 +11,43 @@ layout:
       content: "PipBoy Countdown"
       level: 2
 
-    - type: countdown
-      durationSeconds: 300
-      viewMode: digital
-      allowViewChange: true
-      viewModes:
-        - digital
-        - compact
-        - long
-        - date-diff
-      color: "#00ff66"
-      fontSize: "2rem"
+    - type: slideshow
+      next: true
+      transition: reveal
+      rounds:
+        - text: "Mystery food #1"
+          image: "https://static.vecteezy.com/system/resources/previews/050/978/502/large_2x/detective-looking-through-magnifying-glass-solving-a-case-photo.jpg"
+          durationSeconds: 10
+          pauseSeconds: 3
+          reveal: center-out
 
-    - type: reveal
-      image: "https://static.vecteezy.com/system/resources/previews/050/978/502/large_2x/detective-looking-through-magnifying-glass-solving-a-case-photo.jpg"
+        - text: "Mystery food #2"
+          image: "https://static.vecteezy.com/system/resources/previews/050/978/502/large_2x/detective-looking-through-magnifying-glass-solving-a-case-photo.jpg"
+          durationSeconds: 8
+          pauseSeconds: 3
+          reveal: full
+
+
+    - type: revealGame
       durationSeconds: 30
-      direction: center-out
-      aspectRatio: "16 / 9"
-      cover:
-        shape: rectangle
-        color: "#173b68"
-      showProgress: true
-      showCompleteLabel: true 
+      children:
+        - type: countdown
+          viewMode: digital
+          allowViewChange: true
+          viewModes:
+            - digital
+            - compact
+            - long
+            - date-diff
+          color: "#00ff66"
+          fontSize: "2rem"
+
+        - type: reveal
+          image: "https://static.vecteezy.com/system/resources/previews/050/978/502/large_2x/detective-looking-through-magnifying-glass-solving-a-case-photo.jpg"
+          direction: center-out
+          aspectRatio: "16 / 9"
+          cover:
+            shape: rectangle
+            color: "#173b68"
+          showProgress: true
+          showCompleteLabel: true

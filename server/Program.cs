@@ -35,6 +35,7 @@ app.MapGet("/bootstrap.yml", async () =>
 // Discover parties. Default-marked parties sort first, then by ID.
 app.MapGet("/api/parties", () =>
 {
+    
     if (!Directory.Exists(partyRoot))
         return Results.Ok(Array.Empty<object>());
 
@@ -86,5 +87,66 @@ app.MapGet("/api/parties/{partyId}/config", async (string partyId) =>
     var yaml = await File.ReadAllTextAsync(path);
     return Results.Text(yaml, "application/yaml");
 });
+
+
+
+app.MapGet("/api/parties/{partyId}/{**file}", (string partyId, string file) =>
+{
+    if (string.IsNullOrWhiteSpace(partyId) ||
+        partyId.Any(c => !char.IsAsciiLetterOrDigit(c) &&
+                         c != '-' && c != '_'))
+    {
+        return Results.BadRequest("Invalid party ID");
+    }
+
+    if (string.IsNullOrWhiteSpace(file) ||
+        file.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+    {
+        return Results.BadRequest("Invalid filename");
+    }
+
+    var partyDirectory = Path.GetFullPath(
+        Path.Combine(partyRoot, partyId));
+
+    var path = Path.GetFullPath(
+        Path.Combine(partyDirectory, file));
+
+    var relativePath = Path.GetRelativePath(partyDirectory, path);
+
+    if (Path.IsPathRooted(relativePath) ||
+        relativePath == ".." ||
+        relativePath.StartsWith(
+            ".." + Path.DirectorySeparatorChar,
+            StringComparison.Ordinal) ||
+        relativePath.StartsWith(
+            ".." + Path.AltDirectorySeparatorChar,
+            StringComparison.Ordinal))
+    {
+        return Results.BadRequest("Invalid path");
+    }
+
+    if (!File.Exists(path))
+        return Results.NotFound();
+
+    var contentType = Path.GetExtension(path).ToLowerInvariant() switch
+    {
+        ".css" => "text/css",
+        ".html" => "text/html",
+        ".js" => "text/javascript",
+        ".json" => "application/json",
+        ".svg" => "image/svg+xml",
+        ".png" => "image/png",
+        ".jpg" or ".jpeg" => "image/jpeg",
+        ".webp" => "image/webp",
+        ".gif" => "image/gif",
+        ".ico" => "image/x-icon",
+        ".yml" or ".yaml" => "application/yaml",
+        ".txt" => "text/plain",
+        _ => "application/octet-stream"
+    };
+
+    return Results.File(path, contentType);
+});
+
 
 app.Run();
