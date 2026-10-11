@@ -2,10 +2,11 @@
 import { useEffect, useState } from 'react'
 import type { ComponentProps, Config } from '../types/ComponentTypes'
 import { useRemainingTime } from './shared/useRemainingTime'
+import { resolveAssetUrl } from '../utils/resolveAssetUrl'
 
 type RevealType = 'center-out' | 'top-down' | 'full'
 
-export default function SlideshowComponent({ node }: ComponentProps) {
+export default function SlideshowComponent({ node, context }: ComponentProps) {
   const rounds: Config[] = Array.isArray(node.rounds) ? node.rounds : []
   const [index, setIndex] = useState(0)
   const [revealed, setRevealed] = useState(false)
@@ -122,7 +123,11 @@ export default function SlideshowComponent({ node }: ComponentProps) {
     }
   }
 
-  const image = round.image
+  const image =
+  typeof round.image === 'string'
+    ? resolveAssetUrl(round.image, context.partyId)
+    : undefined
+
   const showProgress = usesReveal && durationSeconds !== null && !revealed
 
   return (

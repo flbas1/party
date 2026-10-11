@@ -14,6 +14,7 @@ import CountdownComponent from '../components/CountdownComponent'
 import RevealComponent from '../components/RevealComponent'
 import RevealGameComponent from '../components/RevealGameComponent'
 import SlideshowComponent from '../components/SlideshowComponent'
+import TabCardComponent from '../components/TabCardComponent'
 
 function UnsupportedComponent({ node }: {
   node: Config
@@ -40,6 +41,7 @@ export const componentRegistry: Record<string, ComponentRenderer> = {
   reveal: RevealComponent,
   revealGame: RevealGameComponent,
   slideshow: SlideshowComponent,
+  tabcard: TabCardComponent,
 }
 
 export function renderComponent(

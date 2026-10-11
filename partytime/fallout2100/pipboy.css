@@ -519,3 +519,108 @@ footer .selected {
         animation: none;
     }
 }
+
+/* -------------------------------   from chat
+*/
+
+
+.tabcard {
+  display: flex;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.tabcard-horizontal {
+  flex-direction: column;
+}
+
+.tabcard-vertical {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.tabcard-tabs {
+  display: flex;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.tabcard-horizontal .tabcard-tabs {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.tabcard-vertical .tabcard-tabs {
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.tabcard-tab {
+  cursor: pointer;
+}
+
+.tabcard-tab.active {
+  font-weight: bold;
+}
+
+.tabcard-panels {
+  flex: 1;
+  min-width: 0;
+}
+
+.tabcard-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tabcard-item-name {
+  font-weight: bold;
+}
+
+.tabcard-item-description {
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .tabcard-vertical {
+    flex-direction: column;
+  }
+
+  .tabcard-vertical .tabcard-tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+
+/* PipBoy TabCard buttons */
+.tabcard-tab {
+  background: transparent;
+  color: var(--pip-dim);
+  border: 1px solid var(--pip-dim);
+  padding: 0.65rem 1rem;
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: color 150ms ease, background 150ms ease,
+              border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.tabcard-tab:hover {
+  color: var(--pip);
+  border-color: var(--pip);
+  box-shadow: 0 0 8px var(--pip-glow);
+}
+
+.tabcard-tab.active {
+  color: var(--pip-bg);
+  background: var(--pip);
+  border-color: var(--pip);
+  box-shadow: 0 0 10px var(--pip-glow);
+}
+
+.tabcard-tab:focus-visible {
+  outline: 2px solid var(--pip);
+  outline-offset: 3px;
+}

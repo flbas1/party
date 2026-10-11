@@ -9,30 +9,64 @@ layout:
     - type: heading
       level: 1
       content: "Welcome to the Wasteland"
-    - type: text
-      content: "menu"
-      "food"
-      "YumYum Deviled Eggs - Pure dried whole deviled eggs from before the Great War, preserved and sealed so they can remain edible for generations.",
-      "Iguana on a Stick - Chunks of iguana meat cooked on a wooden skewer. Not the finest meal in the wasteland, but it gets the job done.",
-      "Mirelurk Crab Cakes - Tender mirelurk meat formed into savory cakes.",
-      "Government Cheese — 200% More Preservatives!"
-      
-      "treats"
-      "BlamCo Mac and Cheese - Pre-War boxed macaroni and cheese from BlamCo. A classic comfort food that somehow survived the apocalypse.",
-      "Sugar Bombed Carrots - Fresh wasteland carrots prepared with the unmistakable sweetness of Sugar Bombs.",
-      "Dusty's Brahmin Burgers - A hearty wasteland burger made from locally sourced brahmin. Two heads, one delicious burger.",
-      "Genetically Modified Brahmin-Free Burgers - A sophisticated alternative for survivors who demand the taste of the wasteland without the brahmin.",
-      "Deathclaw Wings - Tender, spicy and absolutely terrifying. Best enjoyed after someone else has done the hunting.",
-      "BlamCo Crispy Strips - Golden, crunchy strips prepared in the finest pre-War tradition. Crispy enough to survive another apocalypse."
-    
-      "beverages"
-      "Nuka-Cola",
-      "Nuka-Sasparilla",
-      "Nuka Mango Quantum - Glows brighter after sunset"
-    
-      "dessert": 
-      "Muttfruit Crumble - A sweet wasteland dessert made with mutfruit, baked beneath a crumbly golden topping.",
-      "Feral Ghoul Apples - Once human. Still delicious.",
-      "Fancy Lads Cake - A frosted pre-War confection packed with enough sugar and preservatives to remain edible long after civilization stopped being edible.  Now with 200% more preservatives"
-  
-  
+    - type: tabcard
+      layout: vertical
+      selection: single
+      defaultOpen: Food
+      tabs:
+        - name: Food
+          items:
+            - name: YumYum Deviled Eggs
+              description: Pure dried whole deviled eggs from before the Great War.
+            - name: Iguana on a Stick
+              description: Not the finest meal in the wasteland, but it gets the job done.
+            - name: Mirelurk Crab Cakes
+              description: "Tender mirelurk meat formed into savory cakes."
+            - name: Government Cheese
+              description: "200% More Preservatives!"
+        
+        - name: Treats
+          id: treats
+          items:
+            - name: BlamCo Mac and Cheese
+              description: "Pre-War boxed macaroni and cheese from BlamCo. A classic comfort food that somehow survived the apocalypse."
+
+            - name: Sugar Bombed Carrots
+              description: "Fresh wasteland carrots prepared with the unmistakable sweetness of Sugar Bombs."
+
+            - name: Dusty's Brahmin Burgers
+              description: "A hearty wasteland burger made from locally sourced brahmin. Two heads, one delicious burger."
+
+            - name: Genetically Modified Brahmin-Free Burgers
+              description: "A sophisticated alternative for survivors who demand the taste of the wasteland without the brahmin."
+
+            - name: Deathclaw Wings
+              description: "Tender, spicy and absolutely terrifying. Best enjoyed after someone else has done the hunting."
+
+            - name: BlamCo Crispy Strips
+              description: "Golden, crunchy strips prepared in the finest pre-War tradition. Crispy enough to survive another apocalypse."
+
+        - name: Beverages
+          id: beverages
+          items:
+
+            - name: Nuka-Cola
+
+            - name: Nuka-Sasparilla
+
+            - name: Nuka Mango Quantum
+              description: "Glows brighter after sunset"
+
+        - name: Dessert
+          id: dessert
+          items:
+
+            - name: Muttfruit Crumble
+              description: "A sweet wasteland dessert made with mutfruit, baked beneath a crumbly golden topping."
+
+            - name: Feral Ghoul Apples
+              description: "Once human. Still delicious."
+
+            - name: Fancy Lads Cake
+              description: "A frosted pre-War confection packed with enough sugar and preservatives to remain edible long after civilization stopped being edible. Now with 200% more preservatives."
+                

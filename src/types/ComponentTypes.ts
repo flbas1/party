@@ -5,6 +5,7 @@ export type Config = Record<string, any>
 
 export type ComponentContext = {
   loading: boolean
+  partyId: string | null
   onOption: (option: Config) => void
   renderComponent: (
     node: Config,
