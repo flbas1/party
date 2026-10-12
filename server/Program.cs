@@ -1,13 +1,31 @@
 using Microsoft.Extensions.FileProviders;
+ 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpClient("MusicAssistant", client =>
+{
+    var baseUrl = builder.Configuration["MusicAssistant:BaseUrl"]
+        ?? throw new InvalidOperationException(
+            "MusicAssistant:BaseUrl is not configured.");
+
+    client.BaseAddress = new Uri(baseUrl);
+    client.Timeout = TimeSpan.FromSeconds(10);
+});
+builder.Services.AddScoped<MusicAssistantClient>();
+
 var app = builder.Build();
+app.MapMusicApi();
 
 var projectRoot = Path.GetFullPath(
     Path.Combine(app.Environment.ContentRootPath, ".."));
 
 var distPath = Path.Combine(projectRoot, "dist");
 var partyRoot = Path.Combine(projectRoot, "partytime");
+
+
+ 
+
 
 var distProvider = new PhysicalFileProvider(distPath);
 
