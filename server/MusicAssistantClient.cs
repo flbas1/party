@@ -64,13 +64,7 @@ public sealed class MusicAssistantClient(
         return null;
     }
 
-        public Task SkipNextAsync(CancellationToken cancellationToken) =>
-        SendCommandAsync("players/cmd/next", cancellationToken);
-
-    public Task SkipPreviousAsync(CancellationToken cancellationToken) =>
-        SendCommandAsync("players/cmd/previous", cancellationToken);
-
-            private async Task SendCommandAsync(
+    private async Task SendCommandAsync(
         string command,
         CancellationToken cancellationToken)
     {
@@ -85,18 +79,18 @@ public sealed class MusicAssistantClient(
         request.Headers.Authorization =
             new AuthenticationHeaderValue("Bearer", token);
 
- request.Content = new StringContent(
-    JsonSerializer.Serialize(new
-    {
-        message_id = "party",
-        command,
-        args = new
-        {
-            player_id = configuration["MusicAssistant:PlayerId"]
-        }
-    }),
-    Encoding.UTF8,
-    "application/json");
+        request.Content = new StringContent(
+           JsonSerializer.Serialize(new
+           {
+               message_id = "party",
+               command,
+               args = new
+               {
+                   player_id = configuration["MusicAssistant:PlayerId"]
+               }
+           }),
+           Encoding.UTF8,
+           "application/json");
 
         using var response = await client.SendAsync(
             request, cancellationToken);
@@ -108,16 +102,25 @@ public sealed class MusicAssistantClient(
         //         response.StatusCode);
 
         if (!response.IsSuccessStatusCode)
-{
-    var body = await response.Content.ReadAsStringAsync(
-        cancellationToken);
+        {
+            var body = await response.Content.ReadAsStringAsync(
+                cancellationToken);
 
-    throw new HttpRequestException(
-        $"Music Assistant command '{command}' failed: " +
-        $"{(int)response.StatusCode} {response.StatusCode}. " +
-        $"Response: {body}",
-        null,
-        response.StatusCode);
-}
+            throw new HttpRequestException(
+                $"Music Assistant command '{command}' failed: " +
+                $"{(int)response.StatusCode} {response.StatusCode}. " +
+                $"Response: {body}",
+                null,
+                response.StatusCode);
+        }
     }
+
+    public Task SkipNextAsync(CancellationToken cancellationToken) => SendCommandAsync("players/cmd/next", cancellationToken);
+
+    public Task SkipPreviousAsync(CancellationToken cancellationToken) => SendCommandAsync("players/cmd/previous", cancellationToken);
+
+    public Task PlayAsync(CancellationToken cancellationToken) => SendCommandAsync("players/cmd/play", cancellationToken);
+
+    public Task StopAsync(CancellationToken cancellationToken) => SendCommandAsync("players/cmd/stop", cancellationToken);
+
 }
